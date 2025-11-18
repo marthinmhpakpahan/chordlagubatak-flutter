@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "167931791752",
+    "project_id": "chordlagubatak-flutter",
+    "storage_bucket": "chordlagubatak-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167931791752:android:6629addd7b8bdffb61523d",
+        "android_client_info": {
+          "package_name": "id.halomoan.chordlagubatak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvgf-XMlDZ4GKCUeWNRKOhDUanjA7Ov-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
