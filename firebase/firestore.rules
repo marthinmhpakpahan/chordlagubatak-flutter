@@ -1,0 +1,53 @@
+/// Firestore Security Rules for Chord Lirik App
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ================================
+    // 🔓 PUBLIC READ — Songs & Authors
+    // ================================
+    match /songs/{songId} {
+      allow read: if true;          // Anyone can read song lyrics
+      allow write: if false;        // No direct writing from clients
+    }
+
+    match /authors/{authorId} {
+      allow read: if true;          // Anyone can read authors
+      allow write: if false;
+    }
+
+    match /chords/{chordId} {
+      allow read: if true;          // Used for chord popup diagrams
+      allow write: if false;
+    }
+
+    // =====================================
+    // 🔒 USERS — Only owner can read/write
+    // =====================================
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+    }
+
+    // =============================================
+    // 📨 SONG REQUESTS — Anyone logged in can create
+    // =============================================
+    match /song_requests/{requestId} {
+      allow create: if request.auth != null;
+
+      // Only admins can update/delete (you add admin check later)
+      allow read: if request.auth != null;  // optional, or make admins only
+
+      allow update, delete: if false; // Block users from modifying requests
+    }
+
+    // =====================================================
+    // 📝 UPDATE REQUESTS (comments/corrections from users)
+    // =====================================================
+    match /update_requests/{requestId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;  // optional
+      allow update, delete: if false;
+    }
+  }
+}
